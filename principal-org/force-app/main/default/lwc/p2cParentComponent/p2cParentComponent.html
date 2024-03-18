@@ -1,0 +1,28 @@
+<template>
+    <c-p2c-alert-component
+        message="Hi, this is a test!;)"
+        card-heading="Parent to child primitive data communication"
+    ></c-p2c-alert-component>
+
+    <c-p2c-carousel-component
+        carousel-details={carouselData}
+        card-heading="Parent to child non-primitive data communication"
+    ></c-p2c-carousel-component>
+
+    <lightning-card title="Parent to child communication on action at parent component">
+        <div class="slds-m-around_medium">
+            <lightning-input type="text" onkeyup={changeHandler} value={percentage}></lightning-input>
+            <c-p2c-progress-component
+                progress-value={percentage}
+            ></c-p2c-progress-component>
+        </div>
+    </lightning-card>
+    <br/>
+    <lightning-button 
+        variant="brand" 
+        label="Reset Slider"
+        onclick={handleClick} >
+    </lightning-button>
+    <br/>
+    <c-p2c-slider-component></c-p2c-slider-component>
+</template>

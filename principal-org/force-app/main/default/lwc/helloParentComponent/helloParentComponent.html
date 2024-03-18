@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Parent Component">
+        <div class="slds-m-around_medium">
+            <h1>Hello from parent component</h1>
+            <template for:each={userNames} for:item="user">
+                <div class="name" key={user}>{user}</div>
+            </template>
+            <!-- for dynamic css, but preferer attribute js-->
+            <div class="child" lwc:dom="manual"></div>
+            <button onclick={fetchDetailHandler}>Click me</button>
+            <br/>
+            <c-hello-child-component></c-hello-child-component>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,39 @@
+<apex:page showHeader="false" sidebar="false" doctype="html-5.0" controller="MLCC_LoginController">
+
+    <head>
+        <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <style>
+       body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h1{
+            color: white;
+            font-size: x-large;
+        }
+        .contentBG{
+            background-color: #4a8f67;
+            padding: 0vh 2vh;
+            margin: 0;
+            height: 100vh;
+            display: grid;
+            align-content: center;
+            justify-content: center;
+            align-items: start;
+            justify-items: stretch;
+        }
+        .sucess{
+            color: #9aeb9a;
+            font-size: 0.9rem;
+        }
+    </style>
+    <div class="contentBG">
+        <h1>Página logada</h1>
+        <p class="sucess">Olá <b>{!$User.FirstName} {!$User.LastName}</b>, você efetuou login com sucesso!</p>
+        <apex:outputLink value="https://d3h000007or98eac-dev-ed.my.site.com/SC/secur/logout.jsp" target="_top">Sair</apex:outputLink>
+    </div>
+</apex:page>

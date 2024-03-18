@@ -1,0 +1,514 @@
+<apex:page showHeader="false" language="pt_BR" sidebar="false" doctype="html-5.0" Controller="TestesDoControlador">
+     <head>
+        <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <style>
+        * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        }
+        
+        body {
+        max-width: 727px;
+        width: 100%;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        margin: 0 auto;
+        }
+        
+        /* FUNDO OPACO */
+        
+        .fundo-opaco {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        background-color: white;
+        opacity: 0.5;
+        z-index: 10;
+        }
+        
+        /* MENU */
+        a {
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
+        }
+        
+        a:hover {
+        opacity: 0.7;
+        }
+        
+        .nav-list {
+        font-size: 14px;
+        }
+        
+        nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+        height: 8vh;
+        position: absolute;
+        top: 0;
+        left: -1px;
+        z-index: 999;
+        }
+        .logon-greeting{
+        color: white;
+        font-size: 14px;
+        margin: 0 2%;
+        }
+        
+        main {
+        height: 92vh;
+        }
+        
+        .nav-list {
+        list-style: none;
+        display: flex;
+        }
+        
+        .nav-list li {
+        margin-left: 32px;
+        }
+        
+        hr {
+        width: 100%;
+        border: 1px solid #9dc5e5;
+        margin: 8% auto;
+        }
+        
+        li img {
+        max-width: 18px;
+        width: 100%;
+        margin-right: 10%;
+        }
+        
+        .mobile-menu {
+        display: none;
+        cursor: pointer;
+        }
+        
+        .mobile-menu div {
+        width: 32px;
+        height: 2px;
+        margin: 8px;
+        transition: 0.3s;
+        }
+        
+        @media (min-width: 728px) {
+        nav {
+        display: none;
+        }
+        }
+        
+        @media (max-width: 727px) {
+        body {
+        overflow-x: hidden;
+        }
+        .nav-list {
+        position: absolute;
+        
+        padding: 50px 30px;
+        
+        top: 8vh;
+        left: 0;
+        width: 50vw;
+        height: auto;
+        background: #327dc8;
+        flex-direction: column;
+        
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in;
+        }
+        
+        .nav-list li {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        opacity: 0;
+        }
+        .mobile-menu {
+        display: block;
+        }
+        }
+        
+        .nav-list.active {
+        transform: translateX(0);
+        }
+        
+        @keyframes navLinkFade {
+        from {
+        opacity: 0;
+        transform: translateX(50px);
+        }
+        to {
+        opacity: 1;
+        transform: translateX(0);
+        }
+        }
+        
+        .mobile-menu.active .line1 {
+        transform: rotate(-45deg) translate(-8px, 8px);
+        }
+        
+        .mobile-menu.active .line2 {
+        opacity: 0;
+        }
+        
+        .mobile-menu.active .line3 {
+        transform: rotate(45deg) translate(-5px, -7px);
+        }
+        
+        
+        .headerAcesso img {
+        max-width: 250px;
+        width: 100%;
+        }        
+        
+        /*CONTAINER*/
+        .container-programa{
+        max-width: 600px;
+        width: 100%;
+        padding: 0 2%;
+        display: flex;
+        flex-direction: column;
+        
+        
+        }
+        
+        .programa-text{
+        max-width: 727px;
+        width:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 100px 0 30px 0;
+        }
+        
+        .programa-text img{
+        width: 22px;
+        margin-right: 20px;
+        }
+        
+        .programa-text p{
+        color: #026eb8;
+        font-size: 22px;
+        text-align: center;
+        line-height: 0;
+        }
+        
+        
+        /* FORM */ 
+        
+        .programa-form{
+        margin-bottom: 150px;
+        }
+        
+        form{
+        
+        }
+        
+        input,
+        select,
+        textarea{
+        width: 100%;
+        border: 2px solid #549ce4;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        }
+        
+        select,
+        input,
+        textarea {
+        padding: 10px 5px !important;
+        }
+        
+        textarea {
+        resize: none;
+        }
+        
+        ::placeholder{
+        color: #2377c2;
+        font-style: italic;
+        }
+        
+        .dadosRepresentante,
+        .dadosDoPaciente,
+        .dadosEndereco,
+        .dadosMedico,
+        .dadosMedicamento,
+        .dadosTratamento{
+        margin: 25px 0;
+        }
+        
+        .campoDuplo{
+        display:flex;
+        justify-content: space-between;
+        }   
+        
+        .campoDDD{
+        width: 15%;
+        }
+        
+        .campoTEL{
+        width: 83%;
+        }
+        
+        .campoNum, .campoCompl{
+        width: 49%;
+        }
+        
+        .dateOnlyInput input {
+        width: 100% !important;
+        }
+        
+        .aux-data{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        margin: 8px 0;
+        }
+        
+        .aux-data-campo{
+        width: 80%;
+        }
+        
+        .btn,
+        .btnDisabled {
+        max-width: 300px;
+        width: 100% !important;
+        font-size: 16px !important;
+        padding: 3% 0 !important;
+        width: 330px !important;
+        text-align: center;
+        margin: 15px 5px !important;
+        border: 0 !important;
+        border-bottom: 2px solid #006CBF !important;
+        color: #006CBF !important;
+        background: #FFF !important;
+        box-shadow: 0px 5px 25px -10px rgba(0,0,0,0.75) !important;
+        }
+        
+        .btnDisabled {
+        opacity: 0.3;
+        }
+        
+        .btn-enviar{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+        
+        /* TEXT */
+        
+        .title{
+        color: #206cbb;
+        font-size:14px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        }
+        
+        .p-trat{
+        color: #206cbb;
+        margin-bottom: 15px;
+        }
+        
+        .aux-data p{
+        color: #206cbb;
+        font-weight: 600;
+        margin-right: 10px;
+        }
+        
+        .p-med{
+        text-transform: uppercase;
+        color: #206cbb;
+        font-weight: 600;
+        margin-bottom:8px;
+        }
+        
+        .dateFormat{
+        display:none
+        }
+        
+        .placeholder{
+        color: #2377c2;
+        font-style: italic;
+        }
+        
+        
+        /* BOX MODAL */
+        
+        .alinhamentoModal{
+        position: fixed !important;
+        background: rgba(255,255,255,0.7);
+        z-index: 999999;
+        width: 100%;
+        height: 115%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        }
+        
+        .msg-erro{
+        width: 200px;
+        height: 250px;
+        background-color: #327dc8;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: center;
+        padding: 0 2%;
+        color: #FFF;
+        }
+        
+        .msg-erro a,
+        .msg-erro button {
+        
+        font-size: 16px !important;
+        padding: 3% 0 !important;
+        width: 150px !important;
+        text-align: center;
+        
+        border: 0 !important;
+        border-bottom: 2px solid #006CBF !important;
+        color: #006CBF !important;
+        background: #FFF !important;
+        
+        text-decoration: none;
+        }
+        
+        /* BOTÃO MODAL SEGUIR */
+        
+        .msg-erro .btn{
+        max-width: 150px !important;
+        width: 100% !important;
+        }
+        
+        .spinner{
+        border: 4px solid #327dc8;
+        border-left-color: white;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        }        
+        @keyframes spin{
+        to { transform: rotate(360deg); }
+        }
+        
+    </style>
+  	<div class="dadosTratamento">
+       <apex:form >                   
+                    
+           <p class="p-med">
+               Já Iniciou o Uso do Medicamento?
+           </p>
+           <apex:input value="{!textoEx}"
+                       id="textoEx" required="true" />
+                      
+           <apex:actionRegion >
+               <div class="btn-enviar">
+                   <apex:commandLink target="_parent" action="{!createRecord}" styleClass="btn" value="ENVIAR 1"/>
+                   <apex:commandLink target="_parent" action="{!createRecord}"  
+                                     onclick="loadingRecord()" oncomplete="showMessageLoad({!modal})" 
+                                     value="ENVIAR 2" styleClass="btn" reRender="modalController,showModalC,showModalD"/>
+               </div>
+           </apex:actionRegion>
+           
+           <apex:panelGroup > 
+               <apex:outputPanel id="modalController">
+                   <apex:outputPanel id="showModalC" rendered="{!modal = 'ContactInsert'}">
+                       <div id="respostaContatoCadastrado" style="display:none">
+                           <div class="alinhamentoModal">
+                               <div class="box-msg">
+                                   <p class="title">CADASTRO</p>
+                                   <div class="spinner" id="spinnerCircular" style="display:none"></div>
+                                   <p class="desc" id="messageResponse"></p>
+                                   <apex:commandButton action="{!forwardToHomeLogada}" value="CONCLUIR" id="teste" />   
+                               </div> 
+                           </div> 
+                       </div> 
+                   </apex:outputPanel>
+                   <apex:outputPanel id="showModalD" rendered="{!modal = 'ContactDuplicated'}">
+                       <div id="respostaContatoDuplicado" style="display:none">
+                           <div class="alinhamentoModal">
+                               <div class="box-msg">
+                                   <p class="title">CADASTRO</p>
+                                   <p class="desc" id="responseValidatedDuplicateLead">
+                                       Esse e-mail já está cadastrado. Por favor abra a página <b>Faço Parte</b> e clique em Redefinir Senha.<br/>
+                                       Você receberá um email para recuperar seu acesso. Mas se ainda não conseguir, entre em contato conosco pelos telefones no <b>Fale Conosco</b>.
+                                   </p>
+                                   
+                               </div> <!--END box-msg --> 
+                           </div> <!--END alinhamentoModal -->
+                       </div> <!--END respostaLeadDuplicado -->
+                   </apex:outputPanel>
+               </apex:outputPanel>
+           </apex:panelGroup>
+       </apex:form>
+    </div>
+    <script type="text/javascript">
+    
+    function loadingRecord(){
+        const acheiSpinner = document.getElementById('spinnerCircular').style.display;
+        if(acheiSpinner == "none"){
+            console.log('funciona');
+            document.getElementById('spinnerCircular').style.display = 'block';
+        }
+    }
+    function showMessageLoad(){
+        document.getElementById('spinnerCircular').style.display = 'none';
+        TestesDoControlador.newContactRequestValidated(function(response, event) {
+            if(event.status && response == 'ContactInsert') {
+                document.getElementById('messageResponse').innerHTML = 'Cadastro Realizado com Sucesso!<br/><br/>Siga as Instruções Enviadas por E-mail para Concluir seu Cadastro.';
+                console.log('TUDO CERTO!');
+            }else if (response == 'DmlException'){
+                document.getElementById('messageResponse').innerHTML = 'Houve algum problema ao tentar completar seu cadastro.<br/> Por favor entre em contato conosco pelos telefones em "Fales Conosco."';
+                console.log('DmlException!');
+            }else{
+            	document.getElementById('messageResponse').innerHTML = 'Erro no sistema.';
+                console.log('Erro no sistema!');
+            }
+        });
+         
+        /*switch(confirmedButton){
+            case 'responseInsert':
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.TestesDoControlador.newContactRequestValidated}',
+                    paramServiceTypeURL,
+                    function(response, event) {
+                        if(event.status && response) {
+                            document.getElementById('messageResponse').innerHTML = 'Cadastro Realizado com Sucesso!<br/><br/>Siga as Instruções Enviadas por E-mail para Concluir seu Cadastro.';
+                            console.log('TUDO CERTO!');
+                        }else{
+                            document.getElementById('messageResponse').innerHTML = 'Houve algum problema ao tentar completar seu cadastro.<br/> Por favor entre em contato conosco pelos telefones em "Fales Conosco."';
+                            console.log('Houve algum problema!');
+                        }
+                        console.log('event.status : '+event.status);
+                        console.log('response: '+response);
+                    }
+                );
+                break;
+            default:
+                document.getElementById('messageResponse').innerHTML = 'Error';//depois pegar uma mensagem melhor para erro no sistema
+                console.log('case default!');
+                break;
+        }*/
+    }
+    </script>
+</apex:page>

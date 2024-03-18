@@ -1,0 +1,38 @@
+<apex:page showHeader="false" sidebar="false" doctype="html-5.0" controller="MLCC_LoginController">
+
+    <head>
+        <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <style>
+       body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        h1{
+            color: red;
+            font-size: x-large;
+        }
+        .contentBG{
+            background-color: #2a2525;
+            padding: 0vh 2vh;
+            margin: 0;
+            height: 100vh;
+            display: grid;
+            align-content: center;
+            justify-content: center;
+            align-items: start;
+            justify-items: stretch;
+        }
+        .normalText{
+            color: white;
+            font-size: 0.9rem;
+        }
+    </style>
+    <div class="contentBG">
+        <h1>Página de Erro</h1>
+        <p class="normalText">Olá <b>{!$User.FirstName} {!$User.LastName}</b>, atenção, ocorreu algum erro!</p>
+    </div>
+</apex:page>

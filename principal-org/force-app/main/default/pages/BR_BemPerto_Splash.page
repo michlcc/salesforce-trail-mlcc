@@ -1,0 +1,13 @@
+<apex:page controller="BR_BemPerto_AccessProfile">
+    <head>
+        <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <!-- END CONTAINER -->
+    <apex:form >
+        <apex:actionFunction rerender="false" action="{!forwardToBemPerto}" name="redirect"/>
+    </apex:form>
+    <script type="text/javascript">
+        setTimeout(redirect, 3000);
+    </script>
+</apex:page>

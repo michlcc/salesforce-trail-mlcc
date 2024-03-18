@@ -1,0 +1,87 @@
+<apex:page showHeader="false" sidebar="false" doctype="html-5.0" controller="MLCC_LoginController">
+
+    <head>
+        <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h1{
+            color: white;
+            font-size: x-large;
+        }
+        a{
+            text-decoration:none;
+            color: #81c6ff;
+        }
+        .contentBG{
+            background-color: #006CBF;
+            padding: 0vh 2vh;
+            margin: 0;
+            height: 100vh;
+            display: grid;
+            align-content: center;
+            justify-content: center;
+            align-items: start;
+            justify-items: stretch;
+        }
+        .contentForm{
+            color: white;
+            display: grid;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+        .itemForm{
+            margin-bottom: 3px;
+        }
+    </style>
+    <body>        
+        <div class="contentBG">
+            <h1>Faça seu login</h1>
+            <p style="color:white">Olá <b>{!$User.FirstName} {!$User.LastName}</b>, insira seus dados de login abaixo:</p>
+            <div class="contentForm">                   
+                <apex:form id="form">  
+                    <div class="slds-grid slds-wrap itemForm">
+                        <div class="slds-col slds-size_12-of-12">
+                             <span><apex:inputText id="username" value="{!username}" html-placeholder="Entre com seu email"/></span>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap itemForm">
+                        <div class="slds-col slds-size_12-of-12">
+                            <span><apex:inputSecret id="password" value="{!password}" html-placeholder="Entre com sua senha"/></span>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap itemForm">
+                        <div class="slds-col slds-size_12-of-12">
+                            <span><apex:commandLink action="{!forwardToEsqueceuSenha}" value="esqueceu sua senha?" /></span>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap itemForm">
+                        <div class="slds-col slds-size_12-of-12">                        
+                            <apex:actionFunction action="{!login}"  reRender="loginForm" name="passPageLabel">
+                                        <apex:param assignTo="{!pageLabel}" value="" name="pageLabel"/>
+                            </apex:actionFunction>
+                            <span><apex:commandButton value="Logar" onclick="startLogin()" reRender="loginForm"/></span>
+                            <apex:outputPanel id="theError" rendered="{!loginError}">
+                                <b>Error ao efetuar o login!</b>
+                            </apex:outputPanel>
+                        </div>
+                    </div>
+                </apex:form>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        function startLogin(){
+            passPageLabel('MLCC_Logon');
+        }
+    </script>    
+</apex:page>

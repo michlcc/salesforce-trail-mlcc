@@ -1,0 +1,21 @@
+/*element, class, pseudo*/
+
+.testSLSDToken{
+    color: var(--lwc-brandAccessible);
+    background-color: var(--lwc-colorBackgroundAlt);
+    font-size: 30px;
+}
+
+p{
+    color: chocolate;
+    border: 1px solid gray;
+}
+
+.user{
+    color: blueviolet;
+}
+
+.user:hover{
+    color: blue;
+    font-size: 30px;
+}

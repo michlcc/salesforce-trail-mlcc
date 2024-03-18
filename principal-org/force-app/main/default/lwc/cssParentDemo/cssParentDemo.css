@@ -1,0 +1,15 @@
+h1{
+    color: red;
+    font-size: 30px;
+}
+/* modo 1 css parent to child*/
+/*c-css-child-demo{
+    display: block;
+    background-color: green;
+    color: white;
+}*/
+/* modo 4 css parent to child*/
+p{
+    font-size: 20px;
+    color: yellow;
+}

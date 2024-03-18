@@ -1,0 +1,12 @@
+/* modo 2 css parent to child*/
+:host{
+    display: block;
+    background-color: red;
+    color: white;
+}
+/* modo 3 css parent to child*/
+:host(.blue){
+    display: block;
+    background-color: blue;
+    color: white;
+}

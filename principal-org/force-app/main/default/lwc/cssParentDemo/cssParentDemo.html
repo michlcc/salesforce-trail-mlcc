@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="CSS composition">
+        <div class="slds-p-around_medium">
+            <h1>Este é o componente pai</h1>
+            <c-css-child-demo>
+                <p>este é um paragrado no componente filho dentro do pai</p>
+            </c-css-child-demo>
+            <c-css-child-demo class="blue">
+                <p>este é um paragrado no componente filho dentro do pai via slot no filho</p>
+            </c-css-child-demo>
+        </div>
+    </lightning-card>
+</template>

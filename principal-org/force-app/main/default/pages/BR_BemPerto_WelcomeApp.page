@@ -1,0 +1,556 @@
+<apex:page showHeader="false" sidebar="false" doctype="html-5.0" controller="SigninController">
+
+    <head>
+        <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+        
+    <style>
+        * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        }
+        
+        body {
+        max-width: 727px;
+        width: 100%;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        margin: 0 auto;
+        background-color:#9cb8ff;
+        }
+        
+        /* FUNDO OPACO */
+        
+        .fundo-opaco {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        background-color: white;
+        opacity: 0.5;
+        z-index: 10;
+        }
+        
+        /* MENU */
+        .nav-list a {
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
+        }
+        
+        .nav-list a:hover {
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
+        opacity: 0.7;
+        }
+        
+        a:hover {
+        opacity: 0.7;
+        }
+        
+        .nav-list {
+        font-size: 14px;
+        }
+        
+        nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+        height: 8vh;
+        position: absolute;
+        top: 0;
+        left: -1px;
+        z-index: 999;
+        }
+        .logon-greeting{
+        color: black;
+        font-size: 14px;
+        margin: 0 2%;
+        }
+        
+        main {
+        height: 92vh;
+        }
+        
+        .nav-list {
+        list-style: none;
+        display: flex;
+        }
+        
+        .nav-list li {
+        margin-left: 32px;
+        }
+        
+        hr {
+        width: 100%;
+        border: 1px solid #9dc5e5;
+        margin: 8% auto;
+        }
+        
+        li img {
+        max-width: 18px;
+        width: 100%;
+        margin-right: 10%;
+        }
+        
+        .mobile-menu {
+        display: none;
+        cursor: pointer;
+        }
+        
+        .mobile-menu div {
+        width: 32px;
+        height: 2px;
+        margin: 8px;
+        transition: 0.3s;
+        }
+        
+        @media (min-width: 728px) {
+        nav {
+        display: none;
+        }
+        }
+        
+        @media (max-width: 727px) {
+        body {
+        overflow-x: hidden;
+        }
+        .nav-list {
+        position: absolute;
+        
+        padding: 50px 30px;
+        
+        top: 8vh;
+        left: 0;
+        width: 50vw;
+        height: auto;
+        background: #327dc8;
+        flex-direction: column;
+        
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in;
+        }
+        
+        .nav-list li {
+        
+        /*display: flex;*/
+        /*align-items: center;*/
+        margin: 10px 0;
+        opacity: 0;
+        }
+        .mobile-menu {
+        display: block;
+        }
+        }
+        
+        .nav-list.active {
+        transform: translateX(0);
+        }
+        
+        @keyframes navLinkFade {
+        from {
+        opacity: 0;
+        transform: translateX(50px);
+        }
+        to {
+        opacity: 1;
+        transform: translateX(0);
+        }
+        }
+        
+        .mobile-menu.active .line1 {
+        transform: rotate(-45deg) translate(-8px, 8px);
+        }
+        
+        .mobile-menu.active .line2 {
+        opacity: 0;
+        }
+        
+        .mobile-menu.active .line3 {
+        transform: rotate(45deg) translate(-5px, -7px);
+        }
+        
+        /* HEADER */
+        .headerAcesso {
+        width: 100%;
+        height: 350px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+        
+        .headerAcesso img {
+        max-width: 250px;
+        width: 100%;
+        }
+
+        
+        /*HEADER*/
+        
+        .container-programa{
+        max-width: 600px;
+        width: 100%;
+        margin: 0 2%;
+        display: flex;
+        flex-direction: column;
+        
+        }
+        
+        .programa-text{
+        max-width: 727px;
+        width:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 100px 0 30px 0;
+        }
+        
+        .programa-text img{
+        width: 25px;
+        margin-right: 20px;
+        }
+        
+        .programa-text p{
+        color: #026eb8;
+        font-size: 28px;
+        text-align: center;
+        line-height: 0;
+        }
+        
+        
+        /**/
+        
+        .btn-deslogado{
+        display: flex;
+        }
+        
+        .btn-deslogado div{
+        text-align: center;
+        width: 200px;
+        margin: 15px 5px;
+        padding: 10px 0;
+        border: 0;
+        border-bottom: 2px solid #006CBF;
+        font-size: 12px;
+        color: #006CBF;
+        background-color: #FFF;
+        box-shadow: 0px 5px 25px -10px rgba(0,0,0,0.75);
+        }
+        
+        .btn-deslogado div:hover{
+        background-color: #006CBF;
+        color: #FFF;
+        }
+        
+        .acesse-text{
+        max-width: 727px;
+        width:100%;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+        margin: 100px 0 30px 0;
+        }
+        
+        .acesse-img{
+        width:30px;
+        margin-right: 20px;
+        
+        }
+        
+        .acesse-text p{
+        color: #026eb8;
+        font-size: 30px;
+        text-align: center;
+        line-height: 0;
+        }
+        
+        .acesse-form{
+        margin-bottom: 150px;
+        }
+        
+        form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        }
+        
+        .campo{
+        width: 330px;
+        margin: 2% 0;
+        padding: 4% 1%;
+        border: 1px solid #549ce4;
+        border-radius: 4px;
+        }
+        
+        
+        input,
+        select{
+        border: 2px solid #549ce4;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        }
+        
+        select{
+        padding: 10px 5px !important;
+        }
+        
+        input{
+        width: 100%;
+        padding: 10px 5px !important;
+        }
+        
+        ::placeholder{
+        color: #2377c2;
+        font-style: italic;
+        text-align: center;
+        }
+        
+        
+        .link-esqueceusenha{
+        margin-bottom: 2%;
+        }
+        
+        
+        a{
+        color: #006CBF;
+        margin-bottom: 25px;
+        }
+        
+        .btn{
+        max-width: 300px;
+        width: 100% !important;
+        font-size: 16px !important;
+        padding: 3% 0 !important;
+        width: 330px !important;
+        text-align: center;
+        margin: 15px 5px !important;
+        border: 0 !important;
+        border-bottom: 2px solid #006CBF !important;
+        color: #006CBF !important;
+        background: #FFF !important;
+        box-shadow: 0px 5px 25px -10px rgba(0,0,0,0.75) !important;
+        }
+        
+        /* BOX MODAL */
+        
+        .alinhamentoModal{
+        position: fixed !important;
+        background: rgba(255,255,255,0.7);
+        z-index: 999999;
+        width: 100%;
+        height: 115%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        }
+        
+        .msg-erro{
+        width: 200px;
+        height: 250px;
+        background-color: #327dc8;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+        padding: 0 2%;
+        color: #FFF;
+        }
+        
+        .msg-erro a,
+        .msg-erro button {
+        
+        font-size: 16px !important;
+        padding: 3% 0 !important;
+        width: 150px !important;
+        text-align: center;
+        
+        border: 0 !important;
+        border-bottom: 2px solid #006CBF !important;
+        color: #006CBF !important;
+        background: #FFF !important;
+        
+        text-decoration: none;
+        }
+        
+        /* BOTÃO MODAL SEGUIR */
+        
+        .msg-erro .btn{
+        max-width: 150px !important;
+        width: 100% !important;
+        }
+
+                
+    </style>
+    
+    <!-- MODAL DE ERRO/SUCESSO -->
+    <apex:form >
+        <apex:outputPanel layout="none" rendered="{!error}">
+            <div class="alinhamentoModal">
+            <div class="msg-erro">
+                <h1>
+                    LOGIN
+                </h1>
+                <p>
+                    Dados Incorretos
+                </p>
+                <apex:commandButton action="{!getCloseModal}" value="Fechar" id="closeModal"/>
+            </div>
+            </div>
+        </apex:outputPanel>
+    </apex:form>
+    
+    <!-- MODAL DE ERRO/SUCESSO -->
+    
+        <!-- MENU -->
+    <nav onclick="backgroundMenu()">
+        <!--BOTÃO ACESSO MENU-->
+        <div class="mobile-menu">
+            <div class="line1" id="b-line1" style="background-color: #fff"></div>
+            <div class="line2" id="b-line2" style="background-color: #fff"></div>
+            <div class="line3" id="b-line3" style="background-color: #fff"></div>
+        </div>
+        <!--SAUDAÇÃO DE USUARIO LOGADO-->
+        
+        <div class="logon-greeting">
+            Olá, {!$User.FirstName} <!--{!$User.LastName}-->
+        </div>
+        
+        <ul class="nav-list">
+            
+            <apex:outputPanel layout="none" rendered="{!NOT(ISPICKVAL($User.UserType, 'Guest'))}">
+                <li>
+                    <apex:outputLink value="https://trail-ed-mlcc-developer-edition.na111.force.com/BemPerto/secur/logout.jsp" target="_top">Sair</apex:outputLink>
+                </li>
+            </apex:outputPanel>
+           
+        </ul>
+    </nav>
+    <!--FUNDO MENU-->
+    
+    <!--FUNDO OPACO-->
+    <div class="fundo-opaco" id="menu-background" style="display: none"></div>
+    <!--FIM FUNDO OPACO-->
+    
+      
+    <div class="container-programa">
+        <div class="programa-text">
+            <p>Acesse seu Perfil</p>
+        </div>
+
+            <div class="acesse-form">
+                <apex:outputPanel rendered="{(ISPICKVAL($User.UserType, 'Guest')}">
+                    <div>
+                        Olá, Guest User 
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!NOT(ISPICKVAL($User.UserType, 'Guest'))}">
+                    <div>
+                        Olá, BemPerto User
+                    </div>
+                </apex:outputPanel>
+                <apex:form >                   
+                    <!--<apex:outputLabel value="{!$Label.site.username}" for="username" />-->
+                    <apex:inputText id="username" value="{!username}" html-placeholder="Entre com seu email"/>
+                    
+                    <!--<apex:outputLabel value="{!$Label.site.password}" for="password" />-->
+                    <apex:inputSecret id="password" value="{!password}" html-placeholder="Entre com sua senha"/>
+                    
+                    <br/>
+
+                    <apex:commandLink target="_top" action="{!login}" styleClass="btn" value="ENVIAR" />
+                    <!--<apex:commandButton action="{!login}" styleClass="btn" value="ENVIAR"/>-->
+                </apex:form>
+            </div>
+        </div>
+
+    <script type="text/javascript">
+    // --------------------------------  MENU
+    
+    class MobileNavbar {
+        constructor(mobileMenu, navList, navLinks) {
+            this.mobileMenu = document.querySelector(mobileMenu);
+            this.navList = document.querySelector(navList);
+            this.navLinks = document.querySelectorAll(navLinks);
+            this.activeClass = "active";
+            
+            this.handleClick = this.handleClick.bind(this);
+        }
+        
+        animateLinks() {
+            this.navLinks.forEach((link, index) => {
+                link.style.animation
+                ? (link.style.animation = "")
+                : (link.style.animation = `navLinkFade 0.5s ease forwards ${
+                   index / 7 + 0.3
+                   }s`);
+            });
+        }
+        
+        handleClick() {
+            this.navList.classList.toggle(this.activeClass);
+            this.mobileMenu.classList.toggle(this.activeClass);
+            this.animateLinks();
+        }
+        
+        addClickEvent() {
+            this.mobileMenu.addEventListener("click", this.handleClick);
+        }
+        
+        init() {
+            if (this.mobileMenu) {
+                this.addClickEvent();
+            }
+            return this;
+        }
+    }
+    
+    const mobileNavbar = new MobileNavbar(
+        ".mobile-menu",
+        ".nav-list",
+        ".nav-list li",
+    );
+        mobileNavbar.init();
+    
+    // -------------------------------- BACKGROUND OPACO MENU
+    function backgroundMenu() {
+        
+        const aparenciaBackground = document.getElementById('menu-background').style.display;
+        
+        if(aparenciaBackground == "none") {
+            document.getElementById('menu-background').style.display = 'block';
+            document.getElementById('b-line1').style.backgroundColor = '#327dc8' ;
+            document.getElementById('b-line2').style.backgroundColor = '#327dc8' ;
+            document.getElementById('b-line3').style.backgroundColor = '#327dc8' ;
+        } else {
+            document.getElementById('menu-background').style.display = 'none';
+            document.getElementById('b-line1').style.backgroundColor = '#FFF' ;
+            document.getElementById('b-line2').style.backgroundColor = '#FFF' ;
+            document.getElementById('b-line3').style.backgroundColor = '#FFF' ;
+        }
+    }
+    </script>
+    
+</apex:page>

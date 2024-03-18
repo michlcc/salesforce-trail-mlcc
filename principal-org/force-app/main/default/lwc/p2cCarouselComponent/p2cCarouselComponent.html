@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title={cardHeading}>
+        <lightning-carousel>
+            <template for:each={carouselDetails} for:item="slide">
+                <lightning-carousel-image
+                    key={slide.header}
+                    src={slide.src}
+                    header={slide.header}
+                    description={slide.description}>
+                </lightning-carousel-image>
+            </template>
+        </lightning-carousel>
+    </lightning-card>
+</template>

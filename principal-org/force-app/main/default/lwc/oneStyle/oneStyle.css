@@ -1,0 +1,7 @@
+@import 'c/cssLibrary';
+
+/*div*/
+.html{
+    width: 83%;
+    background-color: cornflowerblue;
+}
