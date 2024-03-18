@@ -44,7 +44,11 @@ VSCODE EXTENSIONS AND PRE INSTALLATIONS EVALUATED
 - [ ] scripts examples:
    - homolog deployment model
    - deployment model in scratch org
-   - deployment model in prod  
+   - deployment model in prod
+- [X] points of attention for maintaining/expanding orgs
+   - ensure that the environment is up to date on settings and metadata
+   - import records that are dependent on the system's operation (e.g. automations and functionalities in general)
+ 
 
 ## SALESFORCE DEPLOYMENT EXAMPLES
 
