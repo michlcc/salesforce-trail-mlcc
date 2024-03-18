@@ -48,6 +48,8 @@ VSCODE EXTENSIONS AND PRE INSTALLATIONS EVALUATED
 - [X] points of attention for maintaining/expanding orgs
    - ensure that the environment is up to date on settings and metadata
    - import records that are dependent on the system's operation (e.g. automations and functionalities in general)
+   - prior assessment of the org's architecture (objects and their relationships)
+   - carry out tests of the functionalities with the people who work on the process to be worked on
  
 
 ## SALESFORCE DEPLOYMENT EXAMPLES
