@@ -5,6 +5,8 @@ import { subscribe, unsubscribe, MessageContext, APPLICATION_SCOPE } from 'light
 export default class LmsComponentX extends LightningElement {
 
     recevedMessage
+    subscription
+
     @wire (MessageContext)
     context
     
@@ -14,7 +16,7 @@ export default class LmsComponentX extends LightningElement {
 
     subscribeMessage(){
         //subscribe(messageContext, messageChannel, listener, subscriberOptions)
-        subscribe(
+        this.subscription = subscribe(
             this.context,
             SAMPLEMC,
             (message) => { this.handlerMessage(message) },
@@ -24,5 +26,10 @@ export default class LmsComponentX extends LightningElement {
 
     handlerMessage(message){
         this.recevedMessage = (message.lmsMessage.value ? message.lmsMessage.value  : 'NO message published')
+    }
+
+    unsubscribeMessage(){
+        unsubscribe(this.subscription)
+        this.subscription = null
     }
 }

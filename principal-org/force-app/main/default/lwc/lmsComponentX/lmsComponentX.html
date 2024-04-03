@@ -1,6 +1,13 @@
 <template>
     <lightning-card title="LWC LMS Component X">
         <div class="slds-m-around_medium">
+            <lightning-button 
+                variant="brand" 
+                label="Unsubscribe" 
+                onclick={unsubscribeMessage}>
+            </lightning-button>
+        </div>
+        <div class="slds-m-around_medium">
             Receved message: <strong>{recevedMessage}</strong>
         </div>
     </lightning-card>
